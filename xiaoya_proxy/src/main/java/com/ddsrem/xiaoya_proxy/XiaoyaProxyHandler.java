@@ -130,7 +130,7 @@ public class XiaoyaProxyHandler {
                 }
 
                 Map<String, String> headers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-                List<String> keys = Arrays.asList("referer", "icy-metadata", "range", "connection", "accept-encoding", "user-agent", "cookie");
+                List<String> keys = Arrays.asList("referer", "icy-metadata", "range", "connection", "accept-encoding", "user-agent", "cookie", "authorization");
                 for (String key : params.keySet()) if (keys.contains(key)) headers.put(key, params.get(key));
                 if(url.contains("夸克")) {
                     headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) quark-cloud-drive/2.5.20 Chrome/100.0.4896.160 Electron/18.3.5.4-b478491100 Safari/537.36 Channel/pckk_other_ch");
@@ -284,7 +284,7 @@ public class XiaoyaProxyHandler {
             for (int i = 0; i < originalHeaders.size(); i++) {
                 String name = originalHeaders.name(i);
                 String value = originalHeaders.value(i);
-                if(!name.equals("Content-Length") && !name.equals("Content-Type")){
+                if(!name.equals("Content-Length") && !name.equals("Content-Type") && !name.equals("Transfer-Encoding")){
                     headersBuilder.add(name, value);
                 }
             }
@@ -328,13 +328,16 @@ public class XiaoyaProxyHandler {
                 FormBody.Builder formBody = new FormBody.Builder();
                 if (params != null) for (String key : params.keySet()) formBody.add(key, params.get(key));
                 RequestBody requestBody = formBody.build();
-                Request request = new Request.Builder().post(requestBody).url(alistApi).build();
+                Request.Builder requestBuilder = new Request.Builder().post(requestBody).url(alistApi);
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    requestBuilder.addHeader(entry.getKey(), entry.getValue());
+                }
+                Request request = requestBuilder.build();
                 Response response = defaultClient.newCall(request).execute();
                 JSONObject object = new JSONObject(response.body().string());
-                String data = object.getString("data");
-                object = new JSONObject(data);
-                cookie = object.getString("cookie");
-                String location = object.getString("download_link");
+                JSONObject dataObject = object.getJSONObject("data");
+                cookie = dataObject.getString("cookie");
+                String location = dataObject.getString("download_link");
                 location = unescapeUnicode(location);
                 if(location != null && cookie != null && !location.isEmpty() && !cookie.isEmpty()){
                     QurakLinkCacheInfo var = new QurakLinkCacheInfo();

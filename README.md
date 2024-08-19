@@ -13,11 +13,16 @@
   - [功能列表](#功能列表)
 - [相关地址](#相关地址)
 - [通用兼容性测试报告](#通用兼容性测试报告)
-- [免责声明](#免责声明)
 - [Star History](#star-history)
 - [小雅周边工具集合](#小雅周边工具集合)
 - [感谢](#感谢)
 - [捐赠](#捐赠)
+- [许可证](#许可证)
+  - [附加条款](#附加条款)
+  - [免责声明](#免责声明)
+
+> [!WARNING]
+> 请注意，本仓库的开源许可证已于2024年8月16日从 MIT License 切换至 GNU General Public License v3.0。我们建议所有使用者对此有所了解并遵守相关规定。
 
 ## main.sh
 
@@ -66,14 +71,16 @@ bash -c "$(curl --insecure -fsSL https://raw.githubusercontent.com/DDS-Derek/xia
 安装 小雅Alist -> 1 1
 安装 小雅Alist-TVBox -> 5 1
 安装/更新 小雅助手（xiaoyahelper）-> 4 1
-安装 Onelist -> 6 1
+安装 115清理助手 -> 6 1
+安装 Onelist -> 8 3 1
 安装 Portainer -> 8 1 1
 安装 Emby全家桶（一键） -> 2 1
 安装 Jellyfin全家桶（一键） -> 3 1
 安装 Resilio-Sync（单独） -> 2 5 1
 安装 Auto_Symlink -> 8 2 1
-安装 CasaOS -> 8 4 1
+安装 CasaOS -> 8 6 1
 安装 小雅元数据定时爬虫 -> 2 9 1
+安装 Xiaoya Proxy -> 8 4 1
 ——————————————————————————————Emby手动全家桶配置————————————————————————————————————
 单独 下载并解压 全部元数据 -> 2 2 1
 单独 解压 全部元数据 -> 2 2 2
@@ -84,12 +91,21 @@ bash -c "$(curl --insecure -fsSL https://raw.githubusercontent.com/DDS-Derek/xia
 单独 解压 config.mp4 -> 2 2 7
 单独 下载 pikpak.mp4 -> 2 2 8
 单独 解压 pikpak.mp4 -> 2 2 9
-选择 下载器【aria2/wget】-> 2 2 10
+单独 下载 115.mp4 -> 2 2 10
+单独 解压 115.mp4 -> 2 2 11
+解压 115.mp4 的指定元数据目录【非全部解压】-> 2 2 12
+选择 下载器【aria2/wget】-> 2 2 13
 单独 安装Emby（可选择版本，支持官方，amilys，lovechen）-> 2 3
 立即 同步小雅Emby的config目录 -> 2 6
 单独 创建/删除 同步定时更新任务 -> 2 7
 图形化编辑 emby_config.txt -> 2 8
+一键升级Emby容器（可选择镜像版本） -> 2 10
 ————————————————————————————Jellyfin手动全家桶配置——————————————————————————————————
+
+注意：目前官方 Jellyfin 安装方案已经长久未维护！
+如果您需要安装 小雅Jellyfin 全家桶，请使用 AI老G 的脚本安装，风险自担。
+脚本命令：bash <(curl -sSLf https://xy.ggbond.org/xy/xy_install.sh)
+
 单独 下载并解压 全部元数据 -> 3 2 1
 单独 解压 全部元数据 -> 3 2 2
 单独 下载 all_jf.mp4 -> 3 2 3
@@ -105,30 +121,36 @@ bash -c "$(curl --insecure -fsSL https://raw.githubusercontent.com/DDS-Derek/xia
 更新 小雅Alist-TVBox -> 5 2
 更新 小雅Alist -> 1 2
 更新 Resilio-Sync（单独） -> 2 5 2
-更新 Onelist -> 6 2
+更新 115清理助手 -> 6 2
+更新 Onelist -> 8 3 2
 更新 Portainer -> 8 1 2
 更新 Auto_Symlink -> 8 2 2
 更新 小雅元数据定时爬虫 -> 2 9 2
+更新 Xiaoya Proxy -> 8 4 2
 ———————————————————————————————————————卸载———————————————————————————————————————
 卸载 小雅Alist -> 1 3
-卸载 Emby全家桶 -> 2 10
+卸载 Emby全家桶 -> 2 11
 卸载 卸载Jellyfin全家桶 -> 3 4
 卸载 Resilio-Sync（单独） -> 2 5 3
 卸载 小雅助手（xiaoyahelper）-> 4 3
 卸载 小雅Alist-TVBox -> 5 3
-卸载 Onelist -> 6 3
+卸载 115清理助手 -> 6 3
+卸载 Onelist -> 8 3 3
 卸载 Portainer -> 8 1 3
 卸载 Auto_Symlink -> 8 2 3
-卸载 CasaOS -> 8 4 2
+卸载 CasaOS -> 8 6 2
 卸载 小雅元数据定时爬虫 -> 2 9 3
+卸载 Xiaoya Proxy -> 8 4 3
 ————————————————————————————————Docker Compose—————————————————————————————————————
 安装 小雅及全家桶 -> 7 1
 卸载 小雅及全家桶 -> 7 2
 ——————————————————————————————————————系统工具——————————————————————————————————————
-查看系统磁盘挂载 -> 8 3
+查看系统磁盘挂载 -> 8 5
 ———————————————————————————————————————其他———————————————————————————————————————
 一次性运行 小雅助手（xiaoyahelper）-> 4 2
 创建/删除 定时同步更新数据（小雅alist启动时拉取的数据）-> 1 4
+AI老G 安装脚本 -> 8 7
+账号管理 -> 1 5
 ```
 
 **高级功能**
@@ -149,6 +171,7 @@ Docker镜像源选择 -> 9 6
 - [https://hub.docker.com/r/ddsderek/xiaoya-proxy](https://hub.docker.com/r/ddsderek/xiaoya-proxy)
 - [https://hub.docker.com/r/ddsderek/xiaoya-cron](https://hub.docker.com/r/ddsderek/xiaoya-cron)
 - [https://hub.docker.com/r/ddsderek/xiaoya-glue](https://hub.docker.com/r/ddsderek/xiaoya-glue)
+- [https://hub.docker.com/r/ddsderek/xiaoya-115cleaner](https://hub.docker.com/r/ddsderek/xiaoya-115cleaner)
 - 小雅官方 [Telegram](https://t.me/xiaoyaliu00) 交流群
 
 ## 通用兼容性测试报告
@@ -167,6 +190,7 @@ Docker镜像源选择 -> 9 6
 | 小雅元数据爬虫（xiaoya-emd） |        ✅         |         ✅         |        ✅        |
 | 小雅Cron容器（xiaoya-cron）  |        ✅         |         ✅         |        ✅        |
 | 小雅代理容器（xiaoya-proxy）  |        ✅         |         ✅         |        ✅        |
+| 115清理助手（xiaoya-115cleaner）  |        ✅         |         ✅         |        ✅        |
 
 |    系统名称     | main.sh | emby_config_editor.sh |
 | :-------------: | :-----: | :-------------------: |
@@ -201,12 +225,7 @@ Docker镜像源选择 -> 9 6
 |      UGOS       |    ✅    |           ✅           |
 |     UGOS Pro    |    ✅    |           ✅           |
 |   LibreELEC     |    ❌    |           ❌           |
-
-## 免责声明
-
-- 请勿将 小雅系列软件 用于商业用途。
-- 请勿将 小雅系列软件 用于任何违反法律法规的行为。
-- 本仓库所有脚本均基于官方脚本制作，使用请自行承担数据损失但不限于此的风险。
+|  Windows WSL Docker  |    ❌    |           ❌           |
 
 ## Star History
 
@@ -247,3 +266,18 @@ Docker镜像源选择 -> 9 6
 - [捐赠项目作者DDSRem](https://raw.githubusercontent.com/DDS-Derek/xiaoya-alist/master/assets/appreciate-ddsrem.png)
 - [捐赠小雅](https://raw.githubusercontent.com/DDS-Derek/xiaoya-alist/master/assets/appreciate-xiaoya.png)
 - [捐赠AI老G](https://raw.githubusercontent.com/DDS-Derek/xiaoya-alist/master/assets/appreciate-ailaog.png)
+
+## 许可证
+
+此项目根据 GNU General Public License v3.0 许可证进行许可，详见[`LICENSE`](LICENSE) 文件。
+
+### 附加条款
+
+- 请勿将 小雅系列软件 用于商业用途。
+- 请勿将 小雅系列软件 用于任何违反法律法规的行为。
+- 本仓库所有脚本均基于官方脚本制作，使用请自行承担数据损失但不限于此的风险。
+- 本仓库所有脚本仅供学习交流，使用本仓库脚本进行违法操作产生的法律责任由操作者自行承担。
+
+### 免责声明
+
+使用此项目则意味着你接受以上规定和 GNU General Public License v3.0 许可证。

@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck shell=bash
-# shellcheck disable=SC2068
 PATH=${PATH}:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/homebrew/bin
 export PATH
 #
@@ -16,7 +15,7 @@ export PATH
 #
 # Copyright (c) 2024 DDSRem <https://blog.ddsrem.com>
 #
-# This is free software, licensed under the Mit License.
+# This is free software, licensed under the GNU General Public License v3.0.
 #
 # ——————————————————————————————————————————————————————————————————————————————————
 
@@ -48,11 +47,7 @@ if [ -n "${XIAOYA_BRANCH}" ]; then
         if ! curl -sL "https://raw.githubusercontent.com/DDS-Derek/xiaoya-alist/${XIAOYA_BRANCH}/all_in_one.sh" -o /tmp/xiaoya_install.sh; then
             ERROR "脚本获取失败！"
             exit 1
-        else
-            bash /tmp/xiaoya_install.sh $@
         fi
-    else
-        bash /tmp/xiaoya_install.sh $@
     fi
 else
     if ! curl -sL https://ddsrem.com/xiaoya/all_in_one.sh -o /tmp/xiaoya_install.sh; then
@@ -60,16 +55,13 @@ else
             if ! curl -sL https://raw.githubusercontent.com/DDS-Derek/xiaoya-alist/master/all_in_one.sh -o /tmp/xiaoya_install.sh; then
                 ERROR "脚本获取失败！"
                 exit 1
-            else
-                bash /tmp/xiaoya_install.sh $@
             fi
-        else
-            bash /tmp/xiaoya_install.sh $@
         fi
-    else
-        bash /tmp/xiaoya_install.sh $@
     fi
 fi
+INFO "脚本获取成功！"
+# shellcheck disable=SC2068
+bash /tmp/xiaoya_install.sh $@
 if [ -f /tmp/xiaoya_install.sh ]; then
     rm -rf /tmp/xiaoya_install.sh
 fi
